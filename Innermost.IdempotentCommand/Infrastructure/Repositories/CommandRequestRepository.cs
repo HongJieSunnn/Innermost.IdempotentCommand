@@ -31,14 +31,14 @@ namespace Innermost.IdempotentCommand.Infrastructure.Repositories
         public bool Existed(Guid guid)
         {
             //FilterDefinition has a implict conversion by ExpressionFunc.So we should using the namespace of FilterDefinition or there will occur error.
-            var existed = _commandRequest.FindSync<CommandRequest>(_session, c =>c.ID==guid).Any();
+            var existed = _commandRequest.FindSync<CommandRequest>(c =>c.ID==guid).Any();
 
             return existed;
         }
 
         public async Task<bool> ExistedAsync(Guid guid)
         {
-            var existedTask = _commandRequest.FindAsync<CommandRequest>(_session, c => c.ID == guid);
+            var existedTask = _commandRequest.FindAsync<CommandRequest>(c => c.ID == guid);
 
             var existed = await existedTask;
 
