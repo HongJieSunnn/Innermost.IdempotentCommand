@@ -13,25 +13,25 @@ namespace Innermost.IdempotentCommand.Infrastructure.Repositories
         {
             _context=context;
         }
-        public async Task CreateCommandRequestRecordAsync<TCommand>(Guid guid)
+        public async Task CreateCommandRequestRecordAsync<TCommand>(Guid id)
         {
-            if (Existed(guid))
-                throw new ArgumentException($"CommandRequest with GUID ({guid}) has already existed.");
+            if (Existed(id))
+                throw new ArgumentException($"CommandRequest with GUID ({id}) has already existed.");
 
-            var request = new CommandRequest(guid, typeof(TCommand).Name, DateTime.Now);
+            var request = new CommandRequest(id, typeof(TCommand).Name, DateTime.Now);
             _context.Add(request);
             await _context.SaveChangesAsync();
         }
 
-        public bool Existed(Guid guid)
+        public bool Existed(Guid id)
         {
-            var commandRequest = _context.Find<CommandRequest>(("ID",guid));
+            var commandRequest = _context.Find<CommandRequest>(id);
             return commandRequest is not null;
         }
 
-        public async Task<bool> ExistedAsync(Guid guid)
+        public async Task<bool> ExistedAsync(Guid id)
         {
-            var commandRequest =await _context.FindAsync<CommandRequest>(("ID", guid));
+            var commandRequest =await _context.FindAsync<CommandRequest>(id);
             return commandRequest is not null;
         }
     }

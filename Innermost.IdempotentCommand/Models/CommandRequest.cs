@@ -17,11 +17,15 @@ namespace Innermost.IdempotentCommand.Models
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Time { get; set; }
-        public CommandRequest(Guid id,string commandName,DateTime dateTime)
+        public CommandRequest()
+        {
+
+        }
+        public CommandRequest(Guid id,string commandName,DateTime time)
         {
             ID=id;
             CommandName=commandName;
-            Time=dateTime;
+            Time=time;
         }
 
     }

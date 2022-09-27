@@ -9,8 +9,8 @@ namespace Innermost.IdempotentCommand.Infrastructure.Repositories
 {
     public interface ICommandRequestRepository
     {
-        bool Existed(Guid guid);
-        Task<bool> ExistedAsync(Guid guid);
-        Task CreateCommandRequestRecordAsync<TCommand>(Guid guid);
+        bool Existed(Guid id);
+        Task<bool> ExistedAsync(Guid id);
+        Task CreateCommandRequestRecordAsync<TCommand>(Guid id);
     }
 }
